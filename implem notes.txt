@@ -1,0 +1,11 @@
+//add multiplayer and categories
+//5 question per category
+//add restart
+//difficulty/levels? -> faster time
+//static -> inner classes don't have access to private of outer class
+//add random cat_1
+//leaderboard - consider sorting this, maybe use a map of <Player Name, points>
+//consider supporting player names
+//throwing exceptions when invalid input (such as menu)
+//even number questions = fairness
+//debug mode

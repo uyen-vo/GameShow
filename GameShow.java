@@ -9,26 +9,60 @@ import java.util.Timer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//add multiplayer
+//add restart
+
+//static -> inner classes don't have access to private of outer class
+
 public class GameShow {
-	private static int points = 0;
-	private static Lock lock= new ReentrantLock();
-	private static int timeFlag = 0;
-	private static boolean answered = false; 
-	private static Condition answer = lock.newCondition();
+	private static int points;
+	private static Lock lock;
+	private static int timeFlag;
+	private static boolean answered; 
+	private static Condition answer;
+	
+	public GameShow(){
+		//constructor to initialize
+		points = 0;
+		lock = new ReentrantLock();
+		timeFlag = 0;
+		answered = false;
+		answer = lock.newCondition();
+	}
 
 	public static void main(String[] args) {
-		    // Create tasks
-			System.out.println("Welcome to the game. Case matters. Enter \"X\" to quit.");
-		    Runnable printQuestion = new PrintQ();
+		// Create tasks
+		GameShow g = new GameShow();
+		System.out.println("Welcome to the game. Case matters. Enter \"X\" to quit.");
+		Runnable printQuestion = new PrintQ();
+		//Runnable restart = new Restart();
 		    
-		    // Create threads
-		    Thread thread1 = new Thread(printQuestion);
+		// Create threads
+		Thread threadP = new Thread(printQuestion);
+		//Thread threadRS = new Thread(restart);
+		    
+		// Start threads
+		threadP.start();
 
-		    // Start threads
-		    thread1.start();
-	  }
+	}
 	
-	  public static class PrintQ implements Runnable{
+//	public static class Restart implements Runnable{
+//		
+//		public Restart(){
+//			while(gameStart){
+//				if(restartFlag){
+//					//calling the main method again
+//					//garbage collection in Java is automatic
+//				}
+//			}
+//		}
+//		
+//		@Override
+//		public void run(){
+//			
+//		}
+//	}
+	public static class PrintQ implements Runnable{
 			private ArrayList<String> questions = new ArrayList();
 			private Scanner sc = new Scanner(System.in);
 			private String userAns;
@@ -51,29 +85,38 @@ public class GameShow {
 					timeFlag = 0;
 					answered = false;
 					Runnable timer = new TimeTen();
-					Thread thread3 = new Thread(timer);
-				    thread3.start();
+					Thread threadT = new Thread(timer);
+				    threadT.start();
 				    
 					userAns = sc.nextLine();
 				    
 					if(userAns.equals("X")){
-						thread3.interrupt();
+						threadT.interrupt();
 						break;						
 					}
 				    
 				    Runnable reader = new Read(i, userAns);
-				    Thread thread2 = new Thread(reader);
-				    thread2.start();
+				    Thread threadR = new Thread(reader);
+				    threadR.start();
 				    answer.await();
 				    if(timeFlag == 1){
 						continue;
 					}
-				    thread3.interrupt(); //I do this so the timer does not overlap into the next question
+				    threadT.interrupt(); //I do this so the timer does not overlap into the next question
 				    					//This is on purpose and my way to get around using Thread.sleep instead of Timer
 				    
 				}
 				System.out.println("Game end! Total points: " + points);
-				sc.close();
+				System.out.println("Would you like to play again? (y/n)");
+				String a = sc.nextLine();
+				if(a.equals("y") || a.equals("Y")){
+					//call the main method
+					String[] args={};
+					GameShow.main(args);
+				}
+
+				sc.close(); //close the current instance of the game
+
 				} catch (Exception e){
 					e.printStackTrace();
 				}
@@ -82,9 +125,9 @@ public class GameShow {
 				}
 			}
 			
-		}
+	}
 	  
-	  public static class Read implements Runnable{
+	public static class Read implements Runnable{
 
 		ArrayList<String> answers = new ArrayList();
 		String trueAns;

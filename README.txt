@@ -2,10 +2,9 @@ The GameShow is a Java program that asks the player a couple of questions. If th
 
 Runs in a parallel manner to handle different tasks at the same time.
 
-//Goals
-	Add a restart feature
-	Multiplayer
-	Allow for any case
+Still a work in progress. This was a question on an assignment that I expanded on. The original assignment simply asked the game to be able to ask questions and jump to the next one depending on the event of an answer or the timer of 10 seconds running out.
 
-//Research
+//Future implementations
 	Flexibility against typos?
+	Levels/difficulty such as timer adjustment
+	See rough implem notes that I keep during the process

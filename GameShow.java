@@ -25,11 +25,13 @@ public class GameShow {
 	private static ArrayList<String> ans_1 = new ArrayList();
 	private static ArrayList<String> ans_2 = new ArrayList();
 	private static ArrayList<String> ans_3 = new ArrayList();
+	private static ArrayList<String> ans_4 = new ArrayList();
 	
 	//category question list
 	private static ArrayList<String> cat_1 = new ArrayList(); //Politics
 	private static ArrayList<String> cat_2 = new ArrayList(); //TV Characters
 	private static ArrayList<String> cat_3 = new ArrayList(); //TV Shows
+	private static ArrayList<String> cat_4 = new ArrayList(); //KANYE WEST
 
 	//game info
 	private static int curPlayer;
@@ -65,6 +67,16 @@ public class GameShow {
 		ans_3.add("Fargo");
 		ans_3.add("Westworld");
 		
+		//Kanye West
+		cat_4.add("Who did Kanye West want to win the 2009 \"Best Female Video\" award?");
+		cat_4.add("What is Kanye West's most crtically acclaimed album?");
+		cat_4.add("Who would have Kanye voted for if he had voted?");
+		cat_4.add("Who was Kanye's first fan?");
+		ans_4.add("Beyonce");
+		ans_4.add("My Beautiful Dark Twisted Fantasy");
+		ans_4.add("Donald Trump");
+		ans_4.add("Donda West");
+		
 		numPlayers = 0;
 		curPlayer = 0;
 		
@@ -72,13 +84,16 @@ public class GameShow {
 		catNames.add("Politics");
 		catNames.add("TV Characters");
 		catNames.add("TV Shows");
+		catNames.add("Kanye West");
 		
 		cat.add(cat_1);
 		cat.add(cat_2);
 		cat.add(cat_3);
+		cat.add(cat_4);
 		ans.add(ans_1);
 		ans.add(ans_2);
 		ans.add(ans_3);
+		ans.add(ans_4);
 		
 	}
 
@@ -86,7 +101,7 @@ public class GameShow {
 
 		Scanner sc = new Scanner(System.in);
 		GameShow g = new GameShow();
-		System.out.println("Welcome to the game. Enter \"X\" to quit a category at any time.");
+		System.out.println("Welcome to the game. Enter \"X\" to quit a category at any time. Full names for points, +1 per correct answer.");
 		System.out.println("How many players do we have?");
 		numPlayers = sc.nextInt();
 		userScores = new int [numPlayers];

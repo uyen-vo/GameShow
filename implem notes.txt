@@ -9,3 +9,4 @@
 //throwing exceptions when invalid input (such as menu)
 //even number questions = fairness
 //debug mode
+//support for multiple answers?
